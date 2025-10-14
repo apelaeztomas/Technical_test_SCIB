@@ -1,0 +1,29 @@
+<div class="candidate-list">
+  <h2>Lista de candidatos</h2>
+
+  <div *ngIf="loading">Cargando...</div>
+  <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+
+  <table *ngIf="candidates.length > 0">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Seniority</th>
+        <th>Años</th>
+        <th>Disponible</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of candidates">
+        <td>{{ c.name }}</td>
+        <td>{{ c.surname }}</td>
+        <td>{{ c.seniority }}</td>
+        <td>{{ c.years }}</td>
+        <td>{{ c.availability ? 'Sí' : 'No' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="candidates.length === 0 && !loading">No hay candidatos.</div>
+</div>

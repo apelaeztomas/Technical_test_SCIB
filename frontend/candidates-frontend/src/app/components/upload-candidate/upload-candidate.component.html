@@ -1,0 +1,24 @@
+<form [formGroup]="candidateForm" (ngSubmit)="submit()">
+  <label>
+    Nombre:
+    <input formControlName="name" />
+  </label>
+
+  <label>
+    Apellido:
+    <input formControlName="surname" />
+  </label>
+
+  <label>
+    Archivo Excel:
+    <input type="file" (change)="onFileChange($event)" />
+  </label>
+
+  <button type="submit" [disabled]="loading">Subir candidato</button>
+</form>
+
+<div *ngIf="loading">Cargando...</div>
+<div *ngIf="uploadedCandidate">
+  Subido: {{ uploadedCandidate.name }} {{ uploadedCandidate.surname }} ({{ uploadedCandidate.seniority }})
+</div>
+<div *ngIf="errorMsg" style="color:red">{{ errorMsg }}</div>

@@ -1,0 +1,122 @@
+/* Contenedor principal de la tabla */
+.candidate-list {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #FBF1EA;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    color: #ec0000;
+    margin-bottom: 1rem;
+  }
+
+  /* Mensajes de estado */
+  .error {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  div {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+
+    thead {
+      background-color: #ec0000;
+      color: #FBF1EA;
+
+      th {
+        padding: 0.8rem;
+        text-align: left;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #ec0000;
+
+        &:hover {
+          background-color: #fdecec;
+        }
+
+        td {
+          padding: 0.6rem;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+          width: 100%;
+          padding: 0.4rem 0.6rem;
+          border-radius: 0.4rem;
+          border: 1px solid #ec0000;
+        }
+
+        input[type="checkbox"] {
+          transform: scale(1.2);
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
+        }
+
+        button {
+          display: inline-block;
+          min-width: 80px;       // ancho mínimo para que se vean alargados
+          padding: 0.5rem 1rem;  // padding vertical y horizontal
+          border-radius: 1.5rem; // esquinas más redondeadas
+          border: 2px solid #ec0000;
+          background-color: #ec0000;
+          color: #FBF1EA;
+          font-weight: bold;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: all 0.2s;
+
+          &:hover {
+            background-color: #FBF1EA;
+            color: #ec0000;
+            border: 2px solid #ec0000;
+          }
+        }
+      }
+    }
+  }
+
+  /* Mensaje cuando no hay candidatos */
+  div {
+    font-size: 1rem;
+    color: #ec0000;
+    font-weight: bold;
+  }
+
+  button.edit {
+    background-color: #ec0000;
+  }
+
+  button.save {
+    background-color: #28a745; // verde
+  }
+
+  button.cancel {
+    background-color: #6c757d; // gris
+  }
+
+  button.edit:hover,
+  button.save:hover,
+  button.cancel:hover {
+    background-color: #FBF1EA;
+    color: #ec0000;
+  }
+}

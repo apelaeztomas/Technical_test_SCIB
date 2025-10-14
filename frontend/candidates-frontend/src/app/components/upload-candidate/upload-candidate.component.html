@@ -1,20 +1,33 @@
-<form [formGroup]="candidateForm" (ngSubmit)="submit()">
-  <label>
-    Nombre:
-    <input formControlName="name" />
-  </label>
+<div class="form-container">
+  <form [formGroup]="candidateForm" (ngSubmit)="submit()" class="form-card">
+    <h2 class="form-title">Subir candidato</h2>
 
-  <label>
-    Apellido:
-    <input formControlName="surname" />
-  </label>
-  <button type="button" (click)="downloadTemplate()"> Descargar plantilla</button>
-  <label> Cargar plantilla: <input type="file" (change)="onFileChange($event)" /></label>
-  <button type="submit" [disabled]="loading">Subir candidato</button>
-</form>
+    <!-- Nombre y Apellido en la misma fila -->
+    <div class="form-group row" >
+      <input type="text" formControlName="name" placeholder="Nombre" />
+      <input type="text" formControlName="surname" placeholder="Apellido" />
+    </div>
 
-<div *ngIf="loading">Cargando...</div>
-<div *ngIf="uploadedCandidate">
-  Subido: {{ uploadedCandidate.name }} {{ uploadedCandidate.surname }} ({{ uploadedCandidate.seniority }})
+    <!-- Botón de plantilla y cargar archivo juntos -->
+    <div class="form-group row">
+      <button type="button" class="template-btn" (click)="downloadTemplate()">
+        Descargar plantilla
+      </button>
+      <input type="file" (change)="onFileChange($event)" />
+    </div>
+
+    <!-- Botón de subir candidato -->
+    <div class="form-group">
+      <button type="submit" [disabled]="loading">
+        Subir candidato
+      </button>
+    </div>
+
+    <!-- Mensajes -->
+    <div *ngIf="loading" class="loading-msg">Cargando...</div>
+    <div *ngIf="uploadedCandidate" class="success-msg">
+      Se ha cargado correctamente el candidato {{ uploadedCandidate.name }} {{ uploadedCandidate.surname }}
+    </div>
+    <div *ngIf="errorMsg" class="error-msg">{{ errorMsg }}</div>
+  </form>
 </div>
-<div *ngIf="errorMsg" style="color:red">{{ errorMsg }}</div>

@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './upload-candidate.component.html',
-  styleUrls: ['./upload-candidate.component.scss']
+  styleUrls: ['./upload-candidate.component.scss']  // <- aquí
 })
 export class UploadCandidateComponent {
   candidateForm: FormGroup;
@@ -31,13 +31,12 @@ export class UploadCandidateComponent {
   }
 
   downloadTemplate() {
-    const url = 'assets/templates/candidato_plantilla.xlsx';
+    const url = '../assets/templates/candidato_plantilla.xlsx';
     const a = document.createElement('a');
     a.href = url;
     a.download = 'candidato_plantilla.xlsx';
     a.click();
   }
-
 
   submit() {
     if (!this.selectedFile) {
@@ -46,17 +45,10 @@ export class UploadCandidateComponent {
     }
 
     const { name, surname } = this.candidateForm.value;
-
     const formData = new FormData();
     formData.append('excel', this.selectedFile);
     formData.append('name', name);
     formData.append('surname', surname);
-
-    // Depuración
-    console.log('FormData a enviar:');
-    for (const pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
 
     this.loading = true;
     this.candidatesService.uploadCandidate(this.selectedFile, name, surname)

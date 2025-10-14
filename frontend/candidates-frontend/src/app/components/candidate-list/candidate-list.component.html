@@ -24,7 +24,7 @@
           <td>{{ c.years }}</td>
           <td>{{ c.availability ? 'Sí' : 'No' }}</td>
           <td>
-            <button (click)="startEdit(c)">Editar</button>
+            <button class="edit" (click)="startEdit(c)">Editar</button>
             <button (click)="deleteCandidate(c.id)">Borrar</button>
           </td>
         </ng-container>
@@ -41,8 +41,8 @@
           <td><input type="number" [formControl]="getFormControl('years')" /></td>
           <td><input type="checkbox" [formControl]="getFormControl('availability')" /></td>
           <td>
-            <button (click)="saveEdit()">Guardar</button>
-            <button (click)="cancelEdit()">Cancelar</button>
+            <button class="save" (click)="saveEdit()">Guardar</button>
+            <button class="cancel" (click)="cancelEdit()">Cancelar</button>
           </td>
         </ng-template>
       </tr>

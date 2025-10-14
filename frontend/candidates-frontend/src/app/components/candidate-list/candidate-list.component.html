@@ -12,18 +12,42 @@
         <th>Seniority</th>
         <th>Años</th>
         <th>Disponible</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let c of candidates">
-        <td>{{ c.name }}</td>
-        <td>{{ c.surname }}</td>
-        <td>{{ c.seniority }}</td>
-        <td>{{ c.years }}</td>
-        <td>{{ c.availability ? 'Sí' : 'No' }}</td>
+        <ng-container *ngIf="editingId !== c.id; else editRow">
+          <td>{{ c.name }}</td>
+          <td>{{ c.surname }}</td>
+          <td>{{ c.seniority }}</td>
+          <td>{{ c.years }}</td>
+          <td>{{ c.availability ? 'Sí' : 'No' }}</td>
+          <td>
+            <button (click)="startEdit(c)">Editar</button>
+            <button (click)="deleteCandidate(c.id)">Borrar</button>
+          </td>
+        </ng-container>
+
+        <ng-template #editRow>
+          <td><input type="text" [formControl]="getFormControl('name')" /></td>
+          <td><input type="text" [formControl]="getFormControl('surname')" /></td>
+          <td>
+            <select [formControl]="getFormControl('seniority')">
+              <option value="junior">Junior</option>
+              <option value="senior">Senior</option>
+            </select>
+          </td>
+          <td><input type="number" [formControl]="getFormControl('years')" /></td>
+          <td><input type="checkbox" [formControl]="getFormControl('availability')" /></td>
+          <td>
+            <button (click)="saveEdit()">Guardar</button>
+            <button (click)="cancelEdit()">Cancelar</button>
+          </td>
+        </ng-template>
       </tr>
     </tbody>
   </table>
 
-  <div *ngIf="candidates.length === 0 && !loading">No hay candidatos.</div>
+  <div *ngIf="!loading && candidates.length === 0">No hay candidatos.</div>
 </div>

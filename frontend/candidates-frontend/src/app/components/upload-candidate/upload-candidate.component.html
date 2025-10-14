@@ -8,12 +8,8 @@
     Apellido:
     <input formControlName="surname" />
   </label>
-
-  <label>
-    Archivo Excel:
-    <input type="file" (change)="onFileChange($event)" />
-  </label>
-
+  <button type="button" (click)="downloadTemplate()"> Descargar plantilla</button>
+  <label> Cargar plantilla: <input type="file" (change)="onFileChange($event)" /></label>
   <button type="submit" [disabled]="loading">Subir candidato</button>
 </form>
 

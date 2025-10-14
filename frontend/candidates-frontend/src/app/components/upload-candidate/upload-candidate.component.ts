@@ -30,6 +30,15 @@ export class UploadCandidateComponent {
     if (file) this.selectedFile = file;
   }
 
+  downloadTemplate() {
+    const url = 'assets/templates/candidato_plantilla.xlsx';
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'candidato_plantilla.xlsx';
+    a.click();
+  }
+
+
   submit() {
     if (!this.selectedFile) {
       this.errorMsg = 'Selecciona un archivo Excel';

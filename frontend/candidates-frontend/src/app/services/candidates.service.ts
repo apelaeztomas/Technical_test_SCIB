@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 export interface Candidate {
+  id?: string;
   name: string;
   surname: string;
   seniority: 'junior' | 'senior';
@@ -32,6 +33,14 @@ export class CandidatesService {
   getCandidates(): Observable<Candidate[]> {
     return this.http.get<Candidate[]>(this.apiUrl)
       .pipe(catchError(this.handleError));
+  }
+
+  updateCandidate(id: string, update: Partial<Candidate>): Observable<Candidate> {
+    return this.http.put<Candidate>(`${this.apiUrl}/${id}`, update);
+  }
+
+  deleteCandidate(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   private handleError(error: HttpErrorResponse) {

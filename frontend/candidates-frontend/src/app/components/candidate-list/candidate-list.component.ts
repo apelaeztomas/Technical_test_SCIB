@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CandidatesService, Candidate } from '../../services/candidates.service';
-import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-candidate-list',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './candidate-list.component.html',
   styleUrls: ['./candidate-list.component.scss']
 })
@@ -17,19 +17,28 @@ export class CandidateListComponent implements OnInit {
 
   editForm: FormGroup | null = null;
   editingId: string | null = null;
+  filterText = '';
+  filteredCandidates: Candidate[] = [];
+  pageSize = 5;
+  currentPage = 1;
+  paginatedCandidates: Candidate[] = [];
+  totalPages = 1;
 
   constructor(private candidatesService: CandidatesService, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.loadCandidates();
+    this.filteredCandidates = [...this.candidates];
+    this.updatePagination();
   }
 
   loadCandidates() {
     this.loading = true;
     this.candidatesService.getCandidates().subscribe({
       next: data => {
-        console.log('candidates loaded:', data);
         this.candidates = data;
+        this.filteredCandidates = [...this.candidates];
+        this.updatePagination();
         this.loading = false;
       },
       error: err => {
@@ -37,6 +46,40 @@ export class CandidateListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  applyFilter() {
+    const filter = this.filterText.toLowerCase();
+    this.filteredCandidates = this.candidates.filter(c =>
+      c.name.toLowerCase().includes(filter) ||
+      c.surname.toLowerCase().includes(filter) ||
+      c.seniority.toLowerCase().includes(filter) ||
+      c.years.toString().includes(filter) ||
+      (c.availability ? 'sí' : 'no').includes(filter)
+    );
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
+  updatePagination() {
+    this.totalPages = Math.ceil(this.filteredCandidates.length / this.pageSize);
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.paginatedCandidates = this.filteredCandidates.slice(start, end);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePagination();
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
   }
 
   startEdit(candidate: Candidate) {

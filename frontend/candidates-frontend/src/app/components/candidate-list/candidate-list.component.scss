@@ -119,4 +119,43 @@
     background-color: #FBF1EA;
     color: #ec0000;
   }
+
+  .filter-input {
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid #ec0000;
+    font-size: 1rem;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+
+    button {
+      padding: 0.4rem 0.8rem;
+      border-radius: 1rem;
+      border: 2px solid #ec0000;
+      background-color: #ec0000;
+      color: #FBF1EA;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover:not(:disabled) {
+        background-color: #FBF1EA;
+        color: #ec0000;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+    }
+  }
 }

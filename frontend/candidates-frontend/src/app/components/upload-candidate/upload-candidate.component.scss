@@ -10,8 +10,7 @@
   max-width: 500px;
   width: 100%;
   padding: 2rem;
-  background-color: #ec0000;
-  border: 2px solid #FBF1EA;
+  background-color: #FBF1EA;
   border-radius: 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -22,7 +21,7 @@
 /* Título del formulario */
 .form-title {
   font-size: 1.5rem;
-  color: #FBF1EA;
+  color: #ec0000;
   font-weight: bold;
   text-align: center;
   margin-bottom: 1rem;
@@ -49,7 +48,6 @@ input[type="number"],
 select {
   padding: 0.5rem;
   border-radius: 0.5rem;
-  border: 1px solid #ec0000;
   font-size: 1rem;
 }
 
@@ -66,16 +64,16 @@ button {
   padding: 0.7rem;
   border-radius: 1rem;
   border: 2px solid #ec0000;
-  background-color: #FBF1EA;
-  color: #000;
+  background-color: #ec0000;
+  color: #FBF1EA;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 button:hover {
-  background-color: #f5ded9;
-  color: #000;
+  background-color: #e51f1f;
+  color: #FBF1EA;
 }
 
 /* Mensajes */
@@ -86,25 +84,25 @@ button:hover {
 }
 
 .success-msg {
-  color: #FBF1EA;
+  color: green;
   font-weight: bold;
   text-align: center;
 }
 
 .error-msg {
-  color: #FBF1EA;
+  color: red;
   font-weight: bold;
   text-align: center;
 }
 
 /* Botón plantilla */
 .template-btn {
-  background-color: #FBF1EA;
-  color: #000;
+  background-color: #ec0000;
+  color: #FBF1EA;
   border: 2px solid #ec0000;
 }
 
 .template-btn:hover {
-  background-color: #f5ded9;
-  color: #000;
+  background-color: #e51f1f;
+  color: #FBF1EA;
 }

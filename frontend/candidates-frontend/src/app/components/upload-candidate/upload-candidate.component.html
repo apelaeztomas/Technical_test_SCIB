@@ -1,6 +1,6 @@
 <div class="form-container">
   <form [formGroup]="candidateForm" (ngSubmit)="submit()" class="form-card">
-    <h2 class="form-title">Subir candidato</h2>
+    <h2 class="form-title">Nuevo Candidato</h2>
 
     <!-- Nombre y Apellido en la misma fila -->
     <div class="form-group row" >
@@ -19,7 +19,7 @@
     <!-- Botón de subir candidato -->
     <div class="form-group">
       <button type="submit" [disabled]="loading">
-        Subir candidato
+        Añadir candidato
       </button>
     </div>
 

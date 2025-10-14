@@ -1,10 +1,14 @@
 <div class="candidate-list">
   <h2>Lista de candidatos</h2>
-
+  <input type="text"
+       placeholder="Buscar por nombre, apellido, seniority, años o disponible"
+       [(ngModel)]="filterText"
+       (input)="applyFilter()"
+       class="filter-input" />
   <div *ngIf="loading">Cargando...</div>
   <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
 
-  <table *ngIf="candidates.length > 0">
+  <table *ngIf="filteredCandidates.length > 0">
     <thead>
       <tr>
         <th>Nombre</th>
@@ -16,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let c of candidates">
+      <tr *ngFor="let c of paginatedCandidates">
         <ng-container *ngIf="editingId !== c.id; else editRow">
           <td>{{ c.name }}</td>
           <td>{{ c.surname }}</td>
@@ -50,4 +54,11 @@
   </table>
 
   <div *ngIf="!loading && candidates.length === 0">No hay candidatos.</div>
+
+  <!-- Paginación -->
+  <div class="pagination" *ngIf="filteredCandidates.length > pageSize">
+    <button (click)="prevPage()" [disabled]="currentPage === 1">&lt;</button>
+    <span>Página {{ currentPage }} de {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">&gt;</button>
+  </div>
 </div>

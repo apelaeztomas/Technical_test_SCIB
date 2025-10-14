@@ -1,7 +1,7 @@
 /* Contenedor principal del header */
 .main-header {
   display: flex;
-  justify-content: space-between; /* logo a la izquierda, nav a la derecha */
+  justify-content: space-between;
   align-items: center;
   padding: 0.5rem 2rem;
   background-color: #ec0000;
@@ -17,12 +17,12 @@
 .logo-wrapper {
   display: flex;
   align-items: center;
-  padding: 1rem; /* espacio alrededor del logo */
+  padding: 1rem;
 }
 
 .logo {
-  height: 60px; /* altura del logo */
-  width: auto;  /* mantener proporciones */
+  height: 60px;
+  width: auto;
 }
 
 .site-title {

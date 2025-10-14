@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
+/*Modelo del front*/
 export interface Candidate {
   id?: string;
   name: string;
@@ -15,6 +16,7 @@ export interface Candidate {
 @Injectable({
   providedIn: 'root'
 })
+/*Es la Api pero la meto en el servicio. Se que no va aqui pero he aprovechado el servicio para esto*/
 export class CandidatesService {
   private apiUrl = 'http://localhost:3000/candidates';
 

@@ -1,19 +1,16 @@
 <div class="form-container">
   <form [formGroup]="candidateForm" (ngSubmit)="submit()" class="form-card">
     <h2 class="form-title">Nuevo Candidato</h2>
-
-    <!-- Nombre y Apellido en la misma fila -->
     <div class="form-group row" >
       <input type="text" formControlName="name" placeholder="Nombre" />
       <input type="text" formControlName="surname" placeholder="Apellido" />
     </div>
-
-    <!-- Botón de plantilla y cargar archivo juntos -->
+    <!-- Botón de descargar la plantilla para que se siga y no haya fallo -->
     <div class="form-group row">
       <button type="button" class="template-btn" (click)="downloadTemplate()">
         Descargar plantilla
       </button>
-      <input type="file" (change)="onFileChange($event)" />
+      <input id="file" #fileInput type="file" (change)="onFileChange($event)" accept=".xlsx,.xls" />
     </div>
 
     <!-- Botón de subir candidato -->

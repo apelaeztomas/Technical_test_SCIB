@@ -14,7 +14,6 @@ export class CandidateListComponent implements OnInit {
   candidates: Candidate[] = [];
   loading = false;
   errorMsg: string | null = null;
-
   editForm: FormGroup | null = null;
   editingId: string | null = null;
   filterText = '';
@@ -120,10 +119,26 @@ export class CandidateListComponent implements OnInit {
     }
 
     if (!confirm('¿Estás seguro de eliminar este candidato?')) return;
-
+    // Hago esto para que no se quede en la página si borro el ultimo usuario de una pagina
     this.candidatesService.deleteCandidate(id).subscribe({
-      next: () => this.loadCandidates(),
-      error: err => this.errorMsg = err
+      next: () => {
+        this.candidates = this.candidates.filter(c => c.id !== id);
+        this.filteredCandidates = this.filteredCandidates.filter(c => c.id !== id);
+        this.totalPages = Math.max(1, Math.ceil(this.filteredCandidates.length / this.pageSize));
+        if (this.filteredCandidates.length === 0) {
+          this.currentPage = 1;
+          this.paginatedCandidates = [];
+          return;
+        }
+        if (this.currentPage > this.totalPages) {
+          this.currentPage = this.totalPages;
+        }
+        this.updatePagination();
+      },
+      error: err => {
+        console.error('Error borrando candidato', err);
+        this.errorMsg = err?.error?.message || err?.message || 'Error al eliminar';
+      }
     });
   }
 

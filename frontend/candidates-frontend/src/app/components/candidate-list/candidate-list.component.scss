@@ -73,9 +73,9 @@
 
         button {
           display: inline-block;
-          min-width: 80px;       // ancho mínimo para que se vean alargados
-          padding: 0.5rem 1rem;  // padding vertical y horizontal
-          border-radius: 1.5rem; // esquinas más redondeadas
+          min-width: 80px;
+          padding: 0.5rem 1rem;
+          border-radius: 1.5rem;
           border: 2px solid #ec0000;
           background-color: #ec0000;
           color: #FBF1EA;
@@ -106,11 +106,11 @@
   }
 
   button.save {
-    background-color: #28a745; // verde
+    background-color: #28a745;
   }
 
   button.cancel {
-    background-color: #6c757d; // gris
+    background-color: #6c757d;
   }
 
   button.edit:hover,

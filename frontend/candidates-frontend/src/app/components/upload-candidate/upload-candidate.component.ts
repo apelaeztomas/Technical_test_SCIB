@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CandidatesService, Candidate } from '../../services/candidates.service';
 import { CommonModule } from '@angular/common';
@@ -8,9 +8,10 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './upload-candidate.component.html',
-  styleUrls: ['./upload-candidate.component.scss']  // <- aquí
+  styleUrls: ['./upload-candidate.component.scss']
 })
 export class UploadCandidateComponent {
+  @ViewChild('fileInput') fileInputRef!: ElementRef<HTMLInputElement>;
   candidateForm: FormGroup;
   selectedFile: File | null = null;
   uploadedCandidate: Candidate | null = null;
@@ -26,8 +27,12 @@ export class UploadCandidateComponent {
   }
 
   onFileChange(event: any) {
-    const file = event.target.files[0];
-    if (file) this.selectedFile = file;
+    const file = event.target?.files?.[0];
+    if (file) {
+      this.selectedFile = file;
+    } else {
+      this.selectedFile = null;
+    }
   }
 
   downloadTemplate() {
@@ -57,6 +62,14 @@ export class UploadCandidateComponent {
           this.uploadedCandidate = candidate;
           this.errorMsg = null;
           this.loading = false;
+          this.candidateForm.reset();
+          if (this.fileInputRef) {
+            this.fileInputRef.nativeElement.value = '';
+          }
+          this.selectedFile = null;
+          setTimeout(() => {
+            this.uploadedCandidate = null;
+          }, 2000);
         },
         error: (err) => {
           this.errorMsg = err;

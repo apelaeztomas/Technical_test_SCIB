@@ -1,13 +1,8 @@
 <div class="candidate-list">
   <h2>Lista de candidatos</h2>
-  <input type="text"
-       placeholder="Buscar por nombre, apellido, seniority, años o disponible"
-       [(ngModel)]="filterText"
-       (input)="applyFilter()"
-       class="filter-input" />
+  <input type="text" placeholder="Buscar por nombre, apellido, seniority, años o disponible" [(ngModel)]="filterText" (input)="applyFilter()" class="filter-input" />
   <div *ngIf="loading">Cargando...</div>
   <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
-
   <table *ngIf="filteredCandidates.length > 0">
     <thead>
       <tr>
